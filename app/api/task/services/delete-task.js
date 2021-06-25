@@ -3,12 +3,11 @@ const { unAuthorized } = require('../../../format');
 
 module.exports = async (req,res, next) => {
     try {
-        const { userName, userGroup, title } = req.body;
+        const { userName, userGroup } = req.body;
         let resultArray;
         if(userGroup == 'Admin') {
             var myquery = { userName: userName };
-            var newvalues = { $set: {title: title } };
-            dbObject.collection("todos").updateOne(myquery, newvalues, function(err, res) {
+            dbObject.collection("todos").deleteOne(myquery, newvalues, function(err, res) {
                 if (err) throw err;
                 resultArray = res;
                 db.close();
